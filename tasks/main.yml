@@ -1,2 +1,11 @@
-- name: "Installing VIM"
-  apt: pkg=vim state=installed 
+- name: "Install mysql"
+  apt: pkg=mysql-server state=installed
+
+- name: "Install tcl"
+  apt: pkg={{ item  }} state=installed
+  with_items:
+  - tcl
+  - tk
+  - expect
+
+
