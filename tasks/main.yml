@@ -75,7 +75,7 @@
   become: yes
   debconf: name='oracle-java8-installer' question='shared/accepted-oracle-license-v1-1' value='true' vtype='select'
 
-- name: Install Oracle Java 8
+- name: "Install Oracle Java 8"
   become: yes
   apt: name={{item}} state=latest
   with_items:
@@ -83,3 +83,9 @@
   - ca-certificates
   - oracle-java8-set-default
 
+- name: "Install Elasticsearch"
+  command: curl -L -O https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.4.5.tar.gz
+
+- name: "Extract" 
+  command: tar -xvf elasticsearch-1.4.5.tar.gz
+  
