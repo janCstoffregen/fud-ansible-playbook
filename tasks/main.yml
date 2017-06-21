@@ -7,5 +7,79 @@
   - tcl
   - tk
   - expect
+  - tcllib
+  - tcl-tls
+  - tdom
+  - mysqltcl
 
+- name: "Install python packages"
+  apt: pkg={{ item }} state=installed
+  with_items:
+  - python-lxml
+
+#The next two commands were necessary once to solve a bug for the libxml2-dev package
+#- name: "Clean aptitude"
+#  command: apt-get clean
+#- name: "Update aptitude"
+#  command: apt-get update
+
+- name: "Install libxml2-dev"
+  apt: pkg=libxml2-dev
+
+- name: "Install more python packages"
+  apt: pkg={{ item }} state=installed
+  with_items:
+  - libxslt-dev
+  - python-dev
+  - python3-lxml
+  - python-httplib2
+  - python-mysqldb
+  - python-pip
+  - python-numpy
+  - python-scipy 
+
+- name: "Install php - packages" 
+  apt: pkg={{ item }} state=installed
+  with_items:
+  - php7.0
+  - libapache2-mod-php7.0
+  - php-pear
+  - php7.0-cli
+  - php7.0-common
+  - php7.0-curl
+  - php7.0-dev
+  - php7.0-mbstring
+  - php7.0-mysql
+  - php7.0-json
+
+#The next two commands were necessary once to solve a bug for the libxml2-dev package
+- name: "Clean from aptitude"
+  command: apt-get clean
+- name: "Update from aptitude"
+  command: apt-get update
+- name: "Upgrade from aptitude"
+  command: apt-get upgrade -y
+
+- name: "Install Imagemagick"
+  command: apt-get install imagemagick -y
+
+- name: "Install Java"
+  become: yes
+  apt: name=software-properties-common state=latest
+
+- name: "Add Oracle Java Repository"
+  become: yes
+  apt_repository: repo='ppa:webupd8team/java'
+
+- name: "Accept Java 8 License"
+  become: yes
+  debconf: name='oracle-java8-installer' question='shared/accepted-oracle-license-v1-1' value='true' vtype='select'
+
+- name: Install Oracle Java 8
+  become: yes
+  apt: name={{item}} state=latest
+  with_items:
+  - oracle-java8-installer
+  - ca-certificates
+  - oracle-java8-set-default
 
