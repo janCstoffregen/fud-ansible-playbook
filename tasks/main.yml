@@ -18,10 +18,10 @@
   - python-lxml
 
 #The next two commands were necessary once to solve a bug for the libxml2-dev package
-#- name: "Clean aptitude"
-#  command: apt-get clean
-#- name: "Update aptitude"
-#  command: apt-get update
+- name: "Clean aptitude"
+  command: apt-get clean
+- name: "Update aptitude"
+  command: apt-get update
 
 - name: "Install libxml2-dev"
   apt: pkg=libxml2-dev
@@ -52,11 +52,12 @@
   - php7.0-mysql
   - php7.0-json
 
-#The next two commands were necessary once to solve a bug for the libxml2-dev package
 - name: "Clean from aptitude"
   command: apt-get clean
+
 - name: "Update from aptitude"
   command: apt-get update
+
 - name: "Upgrade from aptitude"
   command: apt-get upgrade -y
 
